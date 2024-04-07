@@ -17,7 +17,23 @@ public class Client {
 	private String name;
 	private Long CPF;
 	private LocalDate dateOfBirth;
-	private String address;
+	private String address;	
+	private String type; // Com, Super or Premium
+	private double balance;
+	
+	
+	    public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+		public Client(String name, String type) {
+	        this.name = name;
+	        this.type = type;
+	    }
 	
 	//Getters and Setters
 	public Long getId() {
@@ -49,6 +65,14 @@ public class Client {
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public double getBalance() {
+		return balance;
+	}
+
+	public void setBalance(double balance) {
+		this.balance = balance;
 	}
 
 

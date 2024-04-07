@@ -1,5 +1,6 @@
+package com.digitalbank.app.account;
 import com.digitalbank.app.entity.Client;
-import jakarta.persistence.Entity;
+//import jakarta.persistence.Entity;
 
 
 public class CheckingAccount {
