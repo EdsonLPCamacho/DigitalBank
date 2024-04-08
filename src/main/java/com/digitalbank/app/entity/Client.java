@@ -1,14 +1,19 @@
 package com.digitalbank.app.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import com.digitalbank.app.card.CreditCard;
 import com.digitalbank.app.card.DebitCard;
+import com.digitalbank.app.insurance.CreditCardInsurance;
+import com.digitalbank.app.insurance.FraudInsurance;
+import com.digitalbank.app.insurance.TravelInsurance;
 
 import java.time.LocalDate; // Import LocalDate from java.time
 import java.util.List;
@@ -27,7 +32,9 @@ public class Client {
 	private LocalDate dateOfBirth;
 	private String address;	
 	private String type; // Com, Super or Premium
-	private double balance;
+	// Defining the balance column with default value 0.0 and disallowing null values
+    @Column(nullable = false, columnDefinition = "FLOAT DEFAULT 0.0")
+    private double balance;
 	
     @ManyToOne
     @JoinColumn(name = "client_id")
@@ -39,8 +46,19 @@ public class Client {
 
     @OneToMany(mappedBy = "client")
     private List<DebitCard> debitCards;
+    
+    @OneToOne(mappedBy = "client")
+    private CreditCardInsurance creditCardInsurance;
 
-	
+    @OneToOne(mappedBy = "client")
+    private FraudInsurance fraudInsurance;
+
+    @OneToOne(mappedBy = "client")
+    private TravelInsurance travelInsurance;
+
+    
+ 
+	//Getters and Setters
 	
 	    public String getType() {
 		return type;
@@ -55,7 +73,7 @@ public class Client {
 	        this.type = type;
 	    }
 	
-	//Getters and Setters
+
 	public Long getId() {
 		return id;
 	}
