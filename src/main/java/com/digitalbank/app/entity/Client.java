@@ -2,10 +2,18 @@ package com.digitalbank.app.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import com.digitalbank.app.card.CreditCard;
+import com.digitalbank.app.card.DebitCard;
 
 import java.time.LocalDate; // Import LocalDate from java.time
+import java.util.List;
+
+
  
 @Entity
 public class Client {
@@ -20,6 +28,18 @@ public class Client {
 	private String address;	
 	private String type; // Com, Super or Premium
 	private double balance;
+	
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private Client client;
+	
+    @OneToMany(mappedBy = "client")
+    private List<CreditCard> creditCards;
+    
+
+    @OneToMany(mappedBy = "client")
+    private List<DebitCard> debitCards;
+
 	
 	
 	    public String getType() {
